@@ -1,0 +1,36 @@
+---
+title: "API Practice"
+author: "Rachel Swick"
+format: html
+---
+
+```{r}
+library(tidyverse)
+library(dataRetrieval)
+```
+
+```{r}
+# Set parameters for the query
+siteNumber <- "11118500"
+parameterCd <- "00060" # Discharge
+startDate <- "2023-08-19"
+endDate <- "2023-08-22"
+
+# Query the APIs
+discharge <- readNWISdv(siteNumber, parameterCd, startDate, endDate)
+```
+
+```{r}
+ggplot(data = discharge_data, aes(x = dateTime, y = X_00060_00000))+
+  geom_line()
+
+max_stream_output <- max(discharge$X_00060_00003)
+```
+
+```{r}
+discharge_data <- readNWISuv(siteNumber, parameterCd, startDate, endDate)
+```
+
+
+
+
